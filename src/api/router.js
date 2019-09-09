@@ -4,6 +4,7 @@ const express = require('express');
 const apiRouter = express.Router();
 
 const modelFinder = require(`../middleware/model-finder.js`);
+const auth = require('../auth/middleware');
 
 // Evaluate the model, dynamically
 apiRouter.param('model', modelFinder.load);
@@ -50,7 +51,7 @@ apiRouter.get('/api/v1/:model', handleGetAll);
  * @returns {object} 200 - Count of results with an array of results
  * @returns {Error}  500 - Unexpected error
  */
-apiRouter.post('/api/v1/:model', handlePost);
+apiRouter.post('/api/v1/:model', auth('create'), handlePost);
 
 /**
  * Get a record matching the given id.
@@ -66,7 +67,7 @@ apiRouter.get('/api/v1/:model/:id', handleGetOne);
  * @returns {object} 200 - A model record
  * @returns {Error}  500 - Server error
  */
-apiRouter.put('/api/v1/:model/:id', handlePut);
+apiRouter.put('/api/v1/:model/:id', auth('update'), handlePut);
 
 /**
  * Delete the record matching the id.
@@ -74,7 +75,7 @@ apiRouter.put('/api/v1/:model/:id', handlePut);
  * @returns {object} 200 - The deleted record
  * @returns {Error}  500 - Server error
  */
-apiRouter.delete('/api/v1/:model/:id', handleDelete);
+apiRouter.delete('/api/v1/:model/:id', auth('delete'), handleDelete);
 
 
 // Route Handlers
