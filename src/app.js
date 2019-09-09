@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @module
+ */
 
 // 3rd Party Resources
 const express = require('express');
@@ -24,6 +27,9 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+// Static Routes
+app.use('/docs', express.static('docs'));
+
 // Routes
 app.use(apiRouter);
 app.use(apiDocsRouter);
@@ -35,6 +41,10 @@ app.use(errorHandler);
 
 module.exports = {
   server: app,
+  /**
+   * Start Server on specified port
+   * @param {number} port
+   */
   start: (port) => {
     app.listen(port, () => {
       console.log(`Server Up on ${port}`);
