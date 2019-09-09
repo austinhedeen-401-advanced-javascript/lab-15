@@ -31,8 +31,8 @@ app.use(express.urlencoded({extended:true}));
 app.use('/docs', express.static('docs'));
 
 // Routes
+app.use('/api-docs', apiDocsRouter);
 app.use(apiRouter);
-app.use(apiDocsRouter);
 app.use(authRouter);
 
 // Catchalls
