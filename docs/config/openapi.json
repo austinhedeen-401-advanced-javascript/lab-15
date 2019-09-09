@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Core API",
+    "description": "API documentation for Lab 15",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/vi",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/{model}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "model",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Get all resources in a model",
+        "responses": {
+          "200": {
+            "description": "Returned a list of resources",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAll"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new resource in the given model",
+        "responses": {
+          "200": {
+            "description": "Returns created resources",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/single"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{model}/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "model",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Get a single resource from the data model",
+        "responses": {
+          "200": {
+            "description": "Returned one resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/single"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Replace a resource with the specified id in the given model",
+        "responses": {
+          "200": {
+            "description": "Returns replaced resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/single"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a resource with the specified id in the given model",
+        "responses": {
+          "200": {
+            "description": "Returns replaced resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/single"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a resource with the specified id in the given model",
+        "responses": {
+          "200": {
+            "description": "Returns replaced resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/single"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "getAll": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {
+          "count:2": null,
+          "results": [
+            "{}",
+            "{}"
+          ]
+        }
+      },
+      "single": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {}
+        },
+        "example": {}
+      }
+    }
+  }
+}
